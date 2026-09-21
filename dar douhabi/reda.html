@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dar Douhabi - Cuisine Marocaine</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f4ee;
+            color: #292929;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #24150e;
+            color: white;
+            padding: 20px 8%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #e7a83b;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e7a83b;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 75vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(35, 20, 12, 0.65),
+                    rgba(35, 20, 12, 0.65)
+                ),
+                url("https://plus.unsplash.com/premium_photo-1661883237884-263e8de8869b?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudCUyMGdhc3Ryb25vbWlxdWV8ZW58MHx8MHx8fDA%3D");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 80px);
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #e7a83b;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #f3f3f3;
+        }
+
+        .chef-team-photo {
+            width: 100%;
+            max-width: 720px;
+            height: 320px;
+            margin: 30px auto;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+            border: 3px solid rgba(231, 168, 59, 0.7);
+        }
+
+        .chef-team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .chef-team-caption {
+            margin-top: 12px;
+            font-size: 15px;
+            color: #f3f3f3;
+            font-style: italic;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 14px 32px;
+
+            background: #e7a83b;
+            color: #24150e;
+
+            text-decoration: none;
+
+            border-radius: 30px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .section {
+            max-width: 1250px;
+            margin: auto;
+
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            color: #24150e;
+            margin-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: "";
+            display: block;
+
+            width: 60px;
+            height: 4px;
+
+            background: #e7a83b;
+
+            margin: 12px auto;
+
+            border-radius: 5px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+
+        /* =========================
+           FOOD GRID
+        ========================= */
+
+        .food-container {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 30px;
+        }
+
+
+        /* =========================
+           FOOD CARD
+        ========================= */
+
+        .food-card {
+            background: white;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.08);
+
+            transition: 0.35s ease;
+        }
+
+        .food-card:hover {
+            transform: translateY(-10px);
+
+            box-shadow:
+                0 18px 40px rgba(0, 0, 0, 0.16);
+        }
+
+
+        /* =========================
+           IMAGE
+        ========================= */
+
+        .image-container {
+            overflow: hidden;
+            height: 240px;
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: 0.5s;
+        }
+
+        .food-card:hover img {
+            transform: scale(1.08);
+        }
+
+
+        /* =========================
+           FOOD CONTENT
+        ========================= */
+
+        .food-content {
+            padding: 25px;
+        }
+
+        .food-content h3 {
+            font-size: 24px;
+
+            color: #24150e;
+
+            margin-bottom: 10px;
+        }
+
+        .food-content p {
+            color: #666;
+
+            margin-bottom: 15px;
+        }
+
+        .ingredients {
+            padding-left: 20px;
+        }
+
+        .ingredients li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+
+        /* =========================
+           BADGE
+        ========================= */
+
+        .badge {
+            display: inline-block;
+
+            background: #fff1d5;
+
+            color: #9a6414;
+
+            padding: 5px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about {
+            background: #24150e;
+            color: white;
+
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            max-width: 750px;
+
+            margin: auto;
+
+            color: #ddd;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #160c07;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        footer p {
+            color: #aaa;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+
+                padding: 18px;
+            }
+
+            nav {
+                gap: 15px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 65vh;
+            }
+
+            .section {
+                padding: 60px 18px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .food-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    
+/* ===== Popup détail du plat ===== */
+.food-card { cursor: pointer; }
+
+.food-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, .78);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.food-modal.active {
+  display: flex;
+  animation: modalFade .25s ease;
+}
+
+.food-modal-content {
+  position: relative;
+  width: min(850px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: #fffaf3;
+  border-radius: 24px;
+  box-shadow: 0 20px 70px rgba(0,0,0,.4);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  animation: modalUp .35s ease;
+}
+
+.food-modal-image {
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  object-fit: cover;
+}
+
+.food-modal-info {
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.food-modal-info h2 {
+  color: #7b2d26;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.food-modal-info p {
+  color: #5e463d;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.food-modal-price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #c58b35;
+}
+
+.food-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #7b2d26;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+@keyframes modalFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalUp {
+  from { opacity: 0; transform: translateY(35px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 700px) {
+  .food-modal-content {
+    grid-template-columns: 1fr;
+    max-height: 92vh;
+  }
+
+  .food-modal-image {
+    height: 240px;
+    min-height: 0;
+  }
+
+  .food-modal-info {
+    padding: 24px;
+  }
+
+  .food-modal-info h2 {
+    font-size: 1.5rem;
+  }
+}
+
+</style>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        .menu-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .menu-btn {
+            border: none;
+            cursor: pointer;
+            padding: 13px 22px;
+            border-radius: 30px;
+            background: #24150e;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .menu-btn i {
+            margin-right: 8px;
+            color: #e7a83b;
+        }
+
+        .menu-btn:hover,
+        .menu-btn.active {
+            background: #e7a83b;
+            color: #24150e;
+        }
+
+        .menu-btn:hover i,
+        .menu-btn.active i {
+            color: #24150e;
+        }
+
+        .food-card {
+            position: relative;
+        }
+
+        .category-title {
+            grid-column: 1 / -1;
+            margin: 25px 0 0;
+            color: #24150e;
+            font-size: 28px;
+            border-left: 5px solid #e7a83b;
+            padding-left: 12px;
+        }
+
+        .food-card.hidden {
+            display: none;
+        }
+    </style>
+
+<style>
+
+/* =====================================================
+   PREMIUM MOROCCAN MOTION SYSTEM
+   Lightweight CSS animations + scroll reveal
+   ===================================================== */
+:root {
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-fast: 220ms;
+  --motion-medium: 520ms;
+}
+
+html { scroll-behavior: smooth; }
+
+/* Soft animated atmosphere in the hero */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(circle at 50% 45%, rgba(231,168,59,.16), transparent 42%);
+  animation: heroGlow 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+.hero-content { animation: heroEnter 900ms var(--motion-ease) both; }
+.hero h1 { animation: titleReveal 800ms var(--motion-ease) 100ms both; }
+.hero p { animation: titleReveal 800ms var(--motion-ease) 220ms both; }
+.hero .menu-actions { animation: titleReveal 800ms var(--motion-ease) 340ms both; }
+
+/* Header polish */
+header {
+  transition: background .35s ease, box-shadow .35s ease, padding .35s ease;
+  backdrop-filter: blur(12px);
+}
+header.scrolled {
+  background: rgba(36,21,14,.92);
+  box-shadow: 0 10px 35px rgba(0,0,0,.28);
+}
+nav a { position: relative; }
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 100%;
+  height: 2px;
+  background: #e7a83b;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .3s var(--motion-ease);
+}
+nav a:hover::after, nav a:focus-visible::after { transform: scaleX(1); }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 700ms var(--motion-ease), transform 700ms var(--motion-ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { transform: translateX(-38px); }
+.reveal-right { transform: translateX(38px); }
+.reveal.visible.reveal-left,
+.reveal.visible.reveal-right { transform: translateX(0); }
+
+/* Cards: premium hover without excessive movement */
+.food-card {
+  will-change: transform;
+  transform: translateZ(0);
+  transition: transform 420ms var(--motion-ease), box-shadow 420ms var(--motion-ease), opacity 300ms ease;
+}
+.food-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px rgba(231,168,59,0);
+  pointer-events: none;
+  transition: box-shadow .35s ease;
+}
+.food-card:hover::after { box-shadow: inset 0 0 0 1px rgba(231,168,59,.45); }
+.food-card:hover { transform: translateY(-8px) scale(1.012); }
+.food-card .image-container { position: relative; }
+.food-card .image-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(231,168,59,.10), transparent 55%);
+  opacity: 0;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.food-card:hover .image-container::after { opacity: 1; }
+.food-card img { transition: transform 700ms var(--motion-ease), filter 700ms ease; }
+.food-card:hover img { transform: scale(1.07); filter: saturate(1.06); }
+
+/* Staggered card entrance */
+.food-card.reveal { transition-delay: var(--delay, 0ms); }
+
+/* Filter buttons */
+.menu-btn { position: relative; overflow: hidden; }
+.menu-btn::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 50%; top: 50%;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  transform: translate(-50%, -50%);
+  transition: width .45s ease, height .45s ease;
+}
+.menu-btn:active::before { width: 260px; height: 260px; }
+
+/* Better hide/show animation for filtering */
+.food-card.filter-out {
+  opacity: 0;
+  transform: scale(.96) translateY(10px);
+  pointer-events: none;
+}
+
+/* Prices + selection CTA */
+.food-price {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-top: 18px;
+}
+.price-tag {
+  font-size: 1.15rem; font-weight: 800; color: #b87916;
+  letter-spacing: .3px;
+}
+.select-food-btn {
+  border: 0; cursor: pointer; padding: 10px 16px; border-radius: 999px;
+  background: #24150e; color: #fff; font-weight: 700;
+  transition: transform .25s var(--motion-ease), background .25s ease, box-shadow .25s ease;
+}
+.select-food-btn:hover { transform: translateY(-2px); background: #e7a83b; color: #24150e; box-shadow: 0 8px 20px rgba(36,21,14,.18); }
+.select-food-btn i { margin-right: 6px; }
+
+/* Modal polish */
+.food-modal { opacity: 0; transition: opacity 280ms ease; }
+.food-modal.active { opacity: 1; }
+.food-modal-content {
+  transform: translateY(24px) scale(.97);
+  opacity: 0;
+  transition: transform 420ms var(--motion-ease), opacity 320ms ease;
+}
+.food-modal.active .food-modal-content {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+.food-modal-close { transition: transform .25s ease, background .25s ease; }
+.food-modal-close:hover { transform: rotate(90deg) scale(1.06); }
+
+@keyframes heroGlow {
+  from { transform: scale(1) translate3d(-1%, 0, 0); opacity: .55; }
+  to { transform: scale(1.08) translate3d(1%, -1%, 0); opacity: 1; }
+}
+@keyframes heroEnter {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes titleReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accessibility: never force motion on users who request reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; }
+}
+
+
+/* ===== Selection cart / premium CTA ===== */
+.selection-bar{position:fixed;right:24px;bottom:24px;z-index:5000;transform:translateY(130px);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .35s ease}.selection-bar.show{transform:none;opacity:1;pointer-events:auto}.selection-bar button{border:0;display:flex;align-items:center;gap:10px;background:#24150e;color:#fff;padding:14px 18px;border-radius:999px;box-shadow:0 14px 35px rgba(36,21,14,.28);font-weight:800;font-size:15px;cursor:pointer;transition:.25s}.selection-bar button:hover{transform:translateY(-3px);background:#e7a83b;color:#24150e}.selection-bar b{min-width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#e7a83b;color:#24150e;font-size:12px}.select-food-btn.added{background:#2f7d4a!important;color:#fff!important}
+@media(max-width:700px){.selection-bar{right:14px;bottom:14px;left:14px}.selection-bar button{width:100%;justify-content:center}}
+</style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <div class="logo">
+            DAR <span>DOUHABI</span>
+        </div>
+
+        <nav>
+
+            <a href="#accueil">Accueil</a>
+
+            <a href="#menu">Menu</a>
+
+            <a href="#about">À propos</a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero" id="accueil">
+
+        <div class="hero-content">
+
+            <h1>
+                Bienvenue chez
+                <span>Dar Douhabi</span>
+            </h1>
+
+            <p>
+                Découvrez les saveurs authentiques
+                de la cuisine marocaine.
+            </p>
+
+            <div class="menu-actions">
+                <a href="#menu" class="btn">
+                    <i class="fa-solid fa-utensils"></i> Voir le menu
+                </a>
+                <a href="#about" class="btn">
+                    <i class="fa-solid fa-circle-info"></i> À propos
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         MENU
+    ========================== -->
+
+    <section class="section" id="menu">
+
+
+        <div class="section-title">
+
+            <h2>
+                Notre Cuisine Marocaine
+            </h2>
+
+            <p>
+                Des recettes traditionnelles
+                préparées avec passion.
+            </p>
+
+            <div class="menu-actions">
+                <button class="menu-btn active" data-filter="all">
+                    <i class="fa-solid fa-border-all"></i> Tout le menu
+                </button>
+                <button class="menu-btn" data-filter="salé">
+                    <i class="fa-solid fa-drumstick-bite"></i> Salé
+                </button>
+                <button class="menu-btn" data-filter="sucré">
+                    <i class="fa-solid fa-cookie-bite"></i> Sucré
+                </button>
+                <button class="menu-btn" data-filter="boisson">
+                    <i class="fa-solid fa-mug-hot"></i> Boissons
+                </button>
+            </div>
+
+        </div>
+
+
+
+        <div class="food-container">
+
+
+
+            <!-- PASTILLA -->
+
+            <div class="food-card" data-category="salé">
+
+                <div class="image-container">
+
+                    <img
+                        src="https://res.cloudinary.com/hksqkdlah/image/upload/c_fill,dpr_2.0,f_auto,fl_lossy.progressive.strip_profile,g_faces:auto,h_599,q_auto:low/SFS_chicken_bstilla-10_mwquv9"
+                        alt="Pastilla marocaine">
+
+                </div>
+
+                <div class="food-content">
+
+                    <span class="badge">
+                        Spécialité
+                    </span>
+
+                    <h3>
+                        Pastilla
+                    </h3>
+
+                    <p>
+                        Une délicieuse spécialité
+                        marocaine croustillante.
+                    </p>
+
+                    <ul class="ingredients">
+
+                        <li>
+                            Poulet et amandes
+                        </li>
+
+                        <li>
+                            Cannelle et sucre
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TAJINE -->
+
+            <div class="food-card" data-category="salé">
+
+                <div class="image-container">
+
+                    <img
+                        src="https://lh3.googleusercontent.com/grass-cs/ACvplmMzmnRgSEBnQxXScYmIz8EAUI8kt_b3AEnM9AfeLZPU2Htw93sN1kwwkUrBUkjXObtXhWXf6MIErZK18VlLO_z2I7P9uSlB5nosk-7XQNwfXU4Nwh-GIDXe5V42lKZcTMJd4mrR1WMXKz26=s1360-w1360-h1020-rw"
+                        alt="Tajine marocain">
+
+                </div>
+
+                <div class="food-content">
+
+                    <span class="badge">
+                        Traditionnel
+                    </span>
+
+                    <h3>
+                        Tajine Marocain
+                    </h3>
+
+                    <p>
+                        Un plat mijoté lentement
+                        avec des épices marocaines.
+                    </p>
+
+                    <ul class="ingredients">
+
+                        <li>
+                            Viande ou poisson
+                        </li>
+
+                        <li>
+                            Légumes et olives
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- COUSCOUS -->
+
+            <div class="food-card" data-category="salé">
+
+                <div class="image-container">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTamGe5Aigj9S9soF4FrsGp5aHPYkG7bke1_pDPvx4SZQGpS7BYKmCix0&s=10"
+                        alt="Couscous marocain">
+
+                </div>
+
+                <div class="food-content">
+
+                    <span class="badge">
+                        Vendredi
+                    </span>
+
+                    <h3>
+                        Couscous Marocain
+                    </h3>
+
+                    <p>
+                        Le célèbre couscous marocain
+                        servi avec des légumes.
+                    </p>
+
+                    <ul class="ingredients">
+
+                        <li>
+                            Semoule de couscous
+                        </li>
+
+                        <li>
+                            Légumes variés
+                        </li>
+
+                        <li>
+                            Viande
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HARIRA -->
+
+            <div class="food-card" data-category="salé">
+
+                <div class="image-container">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTnHkMBYH7uin2Dki2faFSfv0ykbSylPFGHMN3ihC95L43cDOmuo7Sfz_L&s=10"
+                        alt="Harira marocaine">
+
+                </div>
+
+                <div class="food-content">
+
+                    <span class="badge">
+                        Tradition
+                    </span>
+
+                    <h3>
+                        Harira
+                    </h3>
+
+                    <p>
+                        Une soupe marocaine
+                        riche et réconfortante.
+                    </p>
+
+                    <ul class="ingredients">
+
+                        <li>
+                            Tomates
+                        </li>
+
+                        <li>
+                            Lentilles et pois chiches
+                        </li>
+
+                        <li>
+                            Coriandre et épices
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BRIOUATES -->
+
+            <div class="food-card" data-category="salé">
+
+                <div class="image-container">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=80"
+                        alt="Briouates marocaines">
+
+                </div>
+
+                <div class="food-content">
+
+                    <span class="badge">
+                        Apéritif
+                    </span>
+
+                    <h3>
+                        Briouates
+                    </h3>
+
+                    <p>
+                        De petites pâtisseries croustillantes
+                        très populaires au Maroc.
+                    </p>
+
+                    <ul class="ingredients">
+
+                        <li>
+                            Viande hachée
+                        </li>
+
+                        <li>
+                            Fromage ou légumes
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MSEMEN -->
+
+            <div class="food-card" data-category="salé">
+
+                <div class="image-container">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGnklcRya18j-h-q-8j8bJY6kpXMPsem0AjmtULod0_gHVmjwye5da3N1M&s=10"
+                        alt="Msemen marocain">
+
+                </div>
+
+                <div class="food-content">
+
+                    <span class="badge">
+                        Petit déjeuner
+                    </span>
+
+                    <h3>
+                        Msemen
+                    </h3>
+
+                    <p>
+                        Une crêpe marocaine feuilletée,
+                        croustillante et délicieuse.
+                    </p>
+
+                    <ul class="ingredients">
+
+                        <li>
+                            Farine
+                        </li>
+
+                        <li>
+                            Semoule
+                        </li>
+
+                        <li>
+                            Beurre et huile
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CHEBAKIA -->
+
+            <div class="food-card" data-category="sucré">
+
+                <div class="image-container">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYCNw95XatDg-jd751jVbQuXnXmEgE2l0jgPtjo8dyBO_Gc5yUWlXZffhA&s=10"
+                        alt="Chebakia marocaine">
+
+                </div>
+
+                <div class="food-content">
+
+                    <span class="badge">
+                        Douceur
+                    </span>
+
+                    <h3>
+                        Chebakia
+                    </h3>
+
+                    <p>
+                        Une pâtisserie marocaine
+                        parfumée au miel et au sésame.
+                    </p>
+
+                    <ul class="ingredients">
+
+                        <li>
+                            Miel
+                        </li>
+
+                        <li>
+                            Sésame
+                        </li>
+
+                        <li>
+                            Cannelle
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- THE -->
+
+            <div class="food-card" data-category="boisson">
+
+                <div class="image-container">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfPuyEGruOIUfwsbol7-5QwRzA8cx5g8YwkwMbd-XMQOdJp1rb_zLLWeQS&s=10"
+                        alt="Thé marocain à la menthe">
+
+                </div>
+
+                <div class="food-content">
+
+                    <span class="badge">
+                        Boisson
+                    </span>
+
+                    <h3>
+                        Thé à la Menthe
+                    </h3>
+
+                    <p>
+                        Le célèbre thé marocain
+                        servi avec de la menthe fraîche.
+                    </p>
+
+                    <ul class="ingredients">
+
+                        <li>
+                            Thé vert
+                        </li>
+
+                        <li>
+                            Menthe fraîche
+                        </li>
+
+                        <li>
+                            Sucre
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+        
+            <!-- 5 PLATS SALES SUPPLEMENTAIRES -->
+            <div class="food-card" data-category="salé">
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ7tS9Bjj_SksNHL80okNlUICA1TVrxnAPVdlBabR1rrub37BShMCr4r4&s=10" alt="Salade marocaine">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Salé</span>
+                    <h3>Salade Marocaine</h3>
+                    <p>Une salade fraîche et parfumée aux légumes.</p>
+                    <ul class="ingredients">
+                        <li>Tomates et concombres</li>
+                        <li>Oignons et herbes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="salé">
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnJll946cYdL_bnybtP9zemBF1qb8m_bT0Hcix8Zn7gg&s=10" alt="rfisa marocan">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Spécialité</span>
+                    <h3>Rfisa marocan</h3>
+                    <p>Une  rfisa de polite.</p>
+                    <ul class="ingredients">
+                        <li>les légumineuses </li>
+                        <li>Les épices et aromates</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="salé">
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUfuNQ_wtmJdp6-J7dGLk5D7b7W0nOw5kLqKQTkeDS4dO2WvCQa8O2sZ0&s=10" alt="Brochettes marocaines">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Grillade</span>
+                    <h3>Brochettes Marocaines</h3>
+                    <p>Des brochettes grillées avec des épices traditionnelles.</p>
+                    <ul class="ingredients">
+                        <li>Viande marinée</li>
+                        <li>Épices marocaines</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="salé">
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPvLYC3dxXbZhN8Dw5jQ8bGO0rCPyE2FLPSg8Q-j9dlev8pdYS3yNg08CQ&s=10" alt="Batbout farci">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Traditionnel</span>
+                    <h3>Batbout Farci</h3>
+                    <p>Un petit pain marocain moelleux et bien garni.</p>
+                    <ul class="ingredients">
+                        <li>Farine et semoule</li>
+                        <li>Viande ou légumes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="salé">
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIUQHM4LZEr7oj2yMcZodX0wcpXUnpuxifu1R0-txK0A&s" alt="Zaalouk marocain">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Entrée</span>
+                    <h3>Zaalouk</h3>
+                    <p>Une salade cuite d'aubergines aux saveurs marocaines.</p>
+                    <ul class="ingredients">
+                        <li>Aubergines</li>
+                        <li>Tomates et épices</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5 DESSERTS SUPPLEMENTAIRES -->
+            <div class="food-card" data-category="sucré">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=80" alt="Gâteau au chocolat">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Dessert</span>
+                    <h3>Gâteau au Chocolat</h3>
+                    <p>Un gâteau moelleux et gourmand au chocolat.</p>
+                    <ul class="ingredients">
+                        <li>Chocolat</li>
+                        <li>Farine et œufs</li>
+                    </ul>
+                </div>
+            </div>
+               <div class="food-card" data-category="sucré">
+                <div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTycvs2vY_BDyQ-h01Nr1ZqJbgzOYmq-eoRncgdS_cKyQ&s=10" alt="rfisa marocan">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Spécialité</span>
+                    <h3>slou</h3>
+                    <p>slou</p>
+                    <ul class="ingredients">
+                        <li> Farine de blé</li>
+                        <li>Graines de sésame </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="sucré">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=1000&q=80" alt="Beignets">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Douceur</span>
+                    <h3>Beignets au Miel</h3>
+                    <p>De délicieux beignets dorés et sucrés.</p>
+                    <ul class="ingredients">
+                        <li>Farine</li>
+                        <li>Miel et sucre</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="sucré">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1000&q=80" alt="Crêpes marocaines">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Tradition</span>
+                    <h3>Crêpes au Miel</h3>
+                    <p>Des crêpes légères servies avec du miel.</p>
+                    <ul class="ingredients">
+                        <li>Farine et lait</li>
+                        <li>Miel</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="sucré">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=1000&q=80" alt="Cupcake">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Gourmand</span>
+                    <h3>Petits Gâteaux</h3>
+                    <p>De petits gâteaux parfaits pour accompagner le thé.</p>
+                    <ul class="ingredients">
+                        <li>Farine et beurre</li>
+                        <li>Sucre et vanille</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="sucré">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1000&q=80" alt="Salade de fruits">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Frais</span>
+                    <h3>Salade de Fruits</h3>
+                    <p>Un dessert frais, coloré et naturellement sucré.</p>
+                    <ul class="ingredients">
+                        <li>Fruits de saison</li>
+                        <li>Jus d'orange</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5 BOISSONS SUPPLEMENTAIRES -->
+            <div class="food-card" data-category="boisson">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=1000&q=80" alt="Jus d'orange">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Boisson</span>
+                    <h3>Jus d'Orange</h3>
+                    <p>Un jus frais préparé avec des oranges.</p>
+                    <ul class="ingredients">
+                        <li>Oranges fraîches</li>
+                        <li>Glaçons</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="boisson">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=1000&q=80" alt="Thé glacé">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Boisson</span>
+                    <h3>Thé Glacé</h3>
+                    <p>Une boisson rafraîchissante et légère.</p>
+                    <ul class="ingredients">
+                        <li>Thé</li>
+                        <li>Citron et glaçons</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="boisson">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=1000&q=80" alt="Jus de fraise">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Boisson</span>
+                    <h3>Jus de Fraise</h3>
+                    <p>Un jus fruité, doux et plein de fraîcheur.</p>
+                    <ul class="ingredients">
+                        <li>Fraises</li>
+                        <li>Lait ou eau</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="boisson">
+                <div class="image-container">
+                    <img src="https://www.un-amour-de-cafe.com/files/Blog/shutterstock_135404954.jpg" alt="Café marocain">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Boisson chaude</span>
+                    <h3>Café Marocain</h3>
+                    <p>Un café parfumé servi chaud.</p>
+                    <ul class="ingredients">
+                        <li>Café</li>
+                        <li>Épices et sucre</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="food-card" data-category="boisson">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=80" alt="Café au lait">
+                </div>
+                <div class="food-content">
+                    <span class="badge">Boisson chaude</span>
+                    <h3>Café au Lait</h3>
+                    <p>Une boisson douce à base de café et de lait.</p>
+                    <ul class="ingredients">
+                        <li>Café</li>
+                        <li>Lait</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section class="section about" id="about">
+
+        <h2>
+            L'esprit de Dar Douhabi
+        </h2>
+
+        <p>
+            Chez Dar Douhabi, nous voulons faire découvrir
+            la richesse de la cuisine marocaine à travers
+            des recettes traditionnelles, des produits
+            de qualité et un accueil chaleureux.
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Dar Douhabi — Cuisine Marocaine
+        </p>
+
+    </footer>
+
+
+
+    <script>
+        const filterButtons = document.querySelectorAll(".menu-btn");
+        const foodCards = document.querySelectorAll(".food-card");
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+
+                const filter = button.dataset.filter;
+
+                foodCards.forEach(card => {
+                    const category = card.dataset.category;
+                    card.classList.toggle(
+                        "hidden",
+                        filter !== "all" && category !== filter
+                    );
+                });
+            });
+        });
+    </script>
+
+
+<!-- Popup détail du plat -->
+<div class="food-modal" id="foodModal" aria-hidden="true">
+  <div class="food-modal-content" role="dialog" aria-modal="true" aria-labelledby="modalFoodTitle">
+    <button class="food-modal-close" id="closeFoodModal" aria-label="Fermer">&times;</button>
+    <img class="food-modal-image" id="modalFoodImage" src="" alt="">
+    <div class="food-modal-info">
+      <h2 id="modalFoodTitle"></h2>
+      <p id="modalFoodDescription"></p>
+      <div class="food-modal-price" id="modalFoodPrice"></div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("foodModal");
+  const closeBtn = document.getElementById("closeFoodModal");
+  const modalImage = document.getElementById("modalFoodImage");
+  const modalTitle = document.getElementById("modalFoodTitle");
+  const modalDescription = document.getElementById("modalFoodDescription");
+  const modalPrice = document.getElementById("modalFoodPrice");
+
+  function openFoodModal(card) {
+    const image = card.querySelector("img");
+    const title = card.querySelector("h3, h2, .food-title, .card-title");
+    const description = card.querySelector("p");
+    const price = card.querySelector(".price, .food-price, .card-price");
+
+    modalImage.src = image ? image.src : "";
+    modalImage.alt = title ? title.textContent.trim() : "Plat marocain";
+    modalTitle.textContent = title ? title.textContent.trim() : "Notre plat";
+    modalDescription.textContent = description
+      ? description.textContent.trim()
+      : "Découvrez ce délicieux plat marocain préparé avec amour.";
+    modalPrice.textContent = card.dataset.price ? `${card.dataset.price} DH` : (price ? price.textContent.trim() : "");
+
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeFoodModal() {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".food-card").forEach(card => {
+    card.addEventListener("click", event => {
+      if (event.target.closest("a, button")) return;
+      openFoodModal(card);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeFoodModal);
+
+  modal.addEventListener("click", event => {
+    if (event.target === modal) closeFoodModal();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && modal.classList.contains("active")) {
+      closeFoodModal();
+    }
+  });
+});
+</script>
+
+
+<script>
+/* Premium interaction layer */
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector("header");
+  const cards = [...document.querySelectorAll(".food-card")];
+  const sections = [...document.querySelectorAll(".section, .section-title, .about")];
+
+  // Prix du menu en MAD (faciles à modifier ici).
+  const prices = [75,65,60,25,35,15,20,15,25,70,60,30,25,30,20,25,25,25,30,20,20,25,18,22];
+  cards.forEach((card, index) => {
+    const title = card.querySelector("h3");
+    const description = card.querySelector("p");
+    const image = card.querySelector("img");
+    const price = prices[index] ?? 25;
+    card.dataset.price = price;
+    card.dataset.title = title?.textContent.trim() || "Plat marocain";
+    card.dataset.description = description?.textContent.trim() || "Délicieux plat marocain.";
+    card.dataset.image = image?.src || "";
+
+    if (!card.querySelector(".food-price")) {
+      const row = document.createElement("div");
+      row.className = "food-price";
+      row.innerHTML = `<span class="price-tag">${price} DH</span><button type="button" class="select-food-btn"><i class="fa-solid fa-bag-shopping"></i> Choisir</button>`;
+      card.querySelector(".food-content")?.appendChild(row);
+    }
+  });
+
+  // Add dishes to the selection cart without leaving the menu.
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem("darDouhabiCart") || "[]"); } catch(e) { cart = []; }
+
+  const selectionBar = document.createElement("div");
+  selectionBar.className = "selection-bar";
+  selectionBar.innerHTML = `<button type="button" id="openSelection"><i class="fa-solid fa-bag-shopping"></i><span>Ma sélection</span><b id="selectionCount">0</b></button>`;
+  document.body.appendChild(selectionBar);
+
+  function saveCart(){ localStorage.setItem("darDouhabiCart", JSON.stringify(cart)); updateSelectionBar(); }
+  function updateSelectionBar(){
+    const count = cart.reduce((sum,item)=>sum + item.quantity,0);
+    document.getElementById("selectionCount").textContent = count;
+    selectionBar.classList.toggle("show", count > 0);
+  }
+
+  document.querySelectorAll(".select-food-btn").forEach(button => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const card = button.closest(".food-card");
+      const image = card.querySelector("img");
+      const title = card.querySelector("h3");
+      const description = card.querySelector("p");
+      const price = Number(card.dataset.price || 0);
+      const existing = cart.find(item => item.title === title.textContent.trim());
+      if(existing) existing.quantity += 1;
+      else cart.push({
+        title: title.textContent.trim(),
+        description: description ? description.textContent.trim() : "",
+        image: image ? image.src : "",
+        price,
+        quantity: 1
+      });
+      saveCart();
+      button.innerHTML = '<i class="fa-solid fa-check"></i> Ajouté';
+      button.classList.add("added");
+      setTimeout(()=>{ button.innerHTML='<i class="fa-solid fa-bag-shopping"></i> Choisir'; button.classList.remove("added"); },1200);
+    });
+  });
+
+  document.getElementById("openSelection").addEventListener("click",()=>{
+    window.location.href = "selection.html";
+  });
+  updateSelectionBar();
+});
+</script>
+
+</body>
+
+</html>

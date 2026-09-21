@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- =========================================================
+         CONFIGURATION DE BASE DE LA PAGE
+         ========================================================= -->
+
+    <!-- Encodage UTF-8 pour afficher correctement les accents -->
+    <meta charset="UTF-8">
+
+    <!-- Rend la page responsive sur téléphone/tablette/ordinateur -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Titre affiché dans l'onglet du navigateur -->
+    <title>Ma sélection — Dar Douhabi</title>
+
+    <!-- Bibliothèque Font Awesome pour les icônes -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        /* =========================================================
+           1. RESET GLOBAL
+           Supprime les marges/paddings par défaut du navigateur.
+           box-sizing facilite le calcul des dimensions.
+           ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* =========================================================
+           2. STYLE GENERAL DE LA PAGE
+           ========================================================= */
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f4ee;
+            color: #24150e;
+            min-height: 100vh;
+        }
+
+
+        /* Conteneur principal avec largeur maximale */
+        .page {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px 80px;
+        }
+
+
+        /* =========================================================
+           3. BOUTON "RETOUR AU MENU"
+           IMPORTANT :
+           Le href doit correspondre EXACTEMENT au nom du fichier
+           HTML de ton menu principal.
+           ========================================================= */
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #24150e;
+            text-decoration: none;
+            font-weight: 800;
+            margin-bottom: 28px;
+        }
+
+        /* Changement de couleur au survol */
+        .back:hover {
+            color: #b87916;
+        }
+
+
+        /* =========================================================
+           4. EN-TÊTE DE LA PAGE DE SÉLECTION
+           ========================================================= */
+
+        .head {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+        /* Cercle contenant l'icône du panier */
+        .head .icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 14px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #e7a83b;
+            font-size: 25px;
+            box-shadow: 0 10px 30px rgba(36, 21, 14, .15);
+        }
+
+
+        /* Titre principal */
+        h1 {
+            font-size: clamp(30px, 5vw, 48px);
+            margin-bottom: 8px;
+        }
+
+
+        /* Petit texte sous le titre */
+        .head p {
+            color: #777;
+            font-size: 17px;
+        }
+
+
+        /* =========================================================
+           5. LISTE DES PLATS
+           ========================================================= */
+
+        .items {
+            display: grid;
+            gap: 18px;
+        }
+
+
+        /* Carte d'un plat sélectionné */
+        .item {
+            display: grid;
+
+            /* Image | informations | prix total */
+            grid-template-columns: 150px 1fr auto;
+
+            align-items: center;
+            gap: 22px;
+
+            background: #fff;
+            border-radius: 22px;
+            padding: 16px;
+
+            box-shadow: 0 12px 35px rgba(36, 21, 14, .08);
+
+            /* Animation d'apparition */
+            animation: up .55s cubic-bezier(.22, 1, .36, 1) both;
+        }
+
+
+        /* Image du plat */
+        .item img {
+            width: 150px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+
+        /* Nom du plat */
+        .item h2 {
+            font-size: 23px;
+            margin-bottom: 6px;
+        }
+
+
+        /* Description du plat */
+        .item p {
+            color: #777;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+
+        /* Prix d'une unité */
+        .unit {
+            color: #b87916;
+            font-weight: 800;
+        }
+
+
+        /* =========================================================
+           6. CONTROLES DE QUANTITE
+           ========================================================= */
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+
+        /* Bloc - quantité + */
+        .qty {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+
+        /* Boutons - et + */
+        .qty button {
+            border: 0;
+            background: #f5eee5;
+            width: 38px;
+            height: 38px;
+            font-size: 19px;
+            cursor: pointer;
+            color: #24150e;
+        }
+
+
+        /* Quantité actuelle */
+        .qty span {
+            width: 38px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+
+        /* Bouton supprimer */
+        .remove {
+            border: 0;
+            background: transparent;
+            color: #9b4b3c;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+
+        /* Total du plat = prix × quantité */
+        .line-total {
+            font-size: 21px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           7. BLOC TOTAL
+           ========================================================= */
+
+        .summary {
+            margin-top: 24px;
+            background: #24150e;
+            color: #fff;
+            border-radius: 24px;
+            padding: 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            box-shadow: 0 18px 45px rgba(36, 21, 14, .2);
+        }
+
+
+        /* Petit texte "Total de votre sélection" */
+        .summary small {
+            color: #d8cbc3;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+
+        /* Grand total */
+        .grand {
+            font-size: 32px;
+            color: #e7a83b;
+            font-weight: 900;
+        }
+
+
+        /* =========================================================
+           8. BOUTON CONFIRMER
+           ========================================================= */
+
+        .confirm {
+            border: 0;
+            border-radius: 999px;
+            padding: 15px 24px;
+            background: #e7a83b;
+            color: #24150e;
+            font-weight: 900;
+            font-size: 16px;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+
+        /* Animation du bouton */
+        .confirm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(231, 168, 59, .25);
+        }
+
+
+        /* =========================================================
+           9. AFFICHAGE QUAND LE PANIER EST VIDE
+           ========================================================= */
+
+        .empty {
+            text-align: center;
+            background: #fff;
+            padding: 55px 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(36, 21, 14, .08);
+        }
+
+
+        .empty h2 {
+            margin-bottom: 8px;
+        }
+
+
+        .empty p {
+            color: #777;
+        }
+
+
+        /* Bouton pour retourner au menu quand la sélection est vide */
+        .menu-link {
+            display: inline-flex;
+            margin-top: 22px;
+            padding: 13px 22px;
+            border-radius: 999px;
+            background: #24150e;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+
+        .menu-link:hover {
+            background: #e7a83b;
+            color: #24150e;
+        }
+
+
+        /* =========================================================
+           10. ANIMATION D'APPARITION DES PLATS
+           ========================================================= */
+
+        @keyframes up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+
+        /* =========================================================
+           11. VERSION MOBILE
+           ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+                padding: 22px 14px 60px;
+            }
+
+            /*
+             * Sur téléphone :
+             * Image à gauche,
+             * informations à droite.
+             */
+            .item {
+                grid-template-columns: 90px 1fr;
+                gap: 14px;
+            }
+
+            /* Petite image sur téléphone */
+            .item img {
+                width: 90px;
+                height: 90px;
+            }
+
+            /*
+             * Le total passe sous les informations.
+             */
+            .line-total {
+                grid-column: 2;
+            }
+
+            /*
+             * Le bloc total devient vertical.
+             */
+            .summary {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .grand {
+                font-size: 28px;
+            }
+        }
+
+
+        /* =========================================================
+           12. ACCESSIBILITÉ
+           Désactive les animations si l'utilisateur demande
+           moins d'animations dans son système.
+           ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================================================
+         CONTENEUR PRINCIPAL
+         ========================================================= -->
+
+    <main class="page">
+
+
+        <!-- =====================================================
+             BOUTON RETOUR AU MENU
+
+             IMPORTANT :
+             Le fichier doit avoir EXACTEMENT ce nom :
+             Dar_Douhabi_Premium_Animations.html
+
+             Si ton fichier menu possède un autre nom,
+             remplace uniquement ce nom ici.
+             ===================================================== -->
+
+        <a class="back" href="reda.html">
+
+            <!-- Icône flèche gauche -->
+            <i class="fa-solid fa-arrow-left"></i>
+
+            <!-- Texte du bouton -->
+            Retour au menu
+
+        </a>
+
+
+        <!-- =====================================================
+             EN-TÊTE
+             ===================================================== -->
+
+        <header class="head">
+
+            <!-- Icône panier -->
+            <div class="icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+
+            <!-- Titre -->
+            <h1>Ma sélection</h1>
+
+            <!-- Description -->
+            <p>
+                Choisissez les plats que vous souhaitez commander,
+                puis confirmez.
+            </p>
+
+        </header>
+
+
+        <!-- =====================================================
+             APPLICATION / PANIER
+
+             JavaScript va remplir automatiquement cette zone.
+             ===================================================== -->
+
+        <div id="app"></div>
+
+    </main>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         Toute la logique de la sélection se trouve ici.
+         ========================================================= -->
+
+    <script>
+
+        /* =====================================================
+           1. RÉCUPÉRER LA ZONE D'AFFICHAGE
+           ===================================================== */
+
+        const app = document.getElementById("app");
+
+
+        /* =====================================================
+           2. RÉCUPÉRER LE PANIER DEPUIS localStorage
+
+           Le menu principal enregistre les plats dans :
+           "darDouhabiCart"
+
+           Le même nom DOIT être utilisé dans les deux pages.
+           ===================================================== */
+
+        let cart = [];
+
+        try {
+
+            cart = JSON.parse(
+                localStorage.getItem("darDouhabiCart") || "[]"
+            );
+
+        } catch (error) {
+
+            /*
+             * Si localStorage contient des données incorrectes,
+             * on démarre avec un panier vide.
+             */
+
+            cart = [];
+        }
+
+
+        /* =====================================================
+           3. FONCTION POUR FORMATER LE PRIX
+
+           Exemple :
+           75 devient "75 DH"
+           ===================================================== */
+
+        function money(number) {
+
+            return Number(number).toFixed(0) + " DH";
+
+        }
+
+
+        /* =====================================================
+           4. AFFICHER LE PANIER
+
+           Cette fonction construit toute l'interface
+           à partir du tableau "cart".
+           ===================================================== */
+
+        function render() {
+
+
+            /* =================================================
+               CAS N°1 : LE PANIER EST VIDE
+               ================================================= */
+
+            if (!cart.length) {
+
+                app.innerHTML = `
+
+                    <div class="empty">
+
+                        <h2>
+                            Votre sélection est vide
+                        </h2>
+
+                        <p>
+                            Retournez au menu et choisissez
+                            les plats que vous voulez.
+                        </p>
+
+                        <a
+                            class="menu-link"
+                            href="reda.html"
+                        >
+
+                            <i class="fa-solid fa-utensils"></i>
+
+                            &nbsp; Retour au menu
+
+                        </a>
+
+                    </div>
+
+                `;
+
+                return;
+            }
+
+
+            /* =================================================
+               CAS N°2 : LE PANIER CONTIENT DES PLATS
+               ================================================= */
+
+            app.innerHTML = `
+
+                <!-- =========================================
+                     LISTE DES PLATS SÉLECTIONNÉS
+                     ========================================= -->
+
+                <div class="items">
+
+                    ${cart.map((item, index) => `
+
+                        <article
+                            class="item"
+                            style="animation-delay:${index * 70}ms"
+                        >
+
+                            <!-- Image du plat -->
+                            <img
+                                src="${item.image}"
+                                alt="${item.title}"
+                            >
+
+
+                            <!-- Informations du plat -->
+                            <div>
+
+                                <!-- Nom -->
+                                <h2>
+                                    ${item.title}
+                                </h2>
+
+
+                                <!-- Description -->
+                                <p>
+                                    ${item.description}
+                                </p>
+
+
+                                <!-- Contrôles -->
+                                <div class="controls">
+
+                                    <!-- Prix unitaire -->
+                                    <span class="unit">
+                                        ${money(item.price)} / unité
+                                    </span>
+
+
+                                    <!-- =====================
+                                         QUANTITÉ
+                                         ===================== -->
+
+                                    <div class="qty">
+
+                                        <!-- Diminuer -->
+                                        <button
+                                            type="button"
+                                            onclick="changeQty(${index}, -1)"
+                                            aria-label="Diminuer la quantité"
+                                        >
+                                            −
+                                        </button>
+
+
+                                        <!-- Quantité actuelle -->
+                                        <span>
+                                            ${item.quantity}
+                                        </span>
+
+
+                                        <!-- Augmenter -->
+                                        <button
+                                            type="button"
+                                            onclick="changeQty(${index}, 1)"
+                                            aria-label="Augmenter la quantité"
+                                        >
+                                            +
+                                        </button>
+
+                                    </div>
+
+
+                                    <!-- =====================
+                                         SUPPRIMER
+                                         ===================== -->
+
+                                    <button
+                                        type="button"
+                                        class="remove"
+                                        onclick="removeItem(${index})"
+                                    >
+
+                                        <i class="fa-solid fa-trash"></i>
+
+                                        Supprimer
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- =========================
+                                 TOTAL DE LA LIGNE
+                                 prix × quantité
+                                 ========================= -->
+
+                            <div class="line-total">
+
+                                ${money(
+                                    Number(item.price) *
+                                    Number(item.quantity)
+                                )}
+
+                            </div>
+
+                        </article>
+
+                    `).join("")}
+
+                </div>
+
+
+                <!-- =========================================
+                     TOTAL GÉNÉRAL
+                     ========================================= -->
+
+                <section class="summary">
+
+                    <div>
+
+                        <small>
+                            Total de votre sélection
+                        </small>
+
+                        <div class="grand">
+
+                            ${money(
+                                cart.reduce(
+                                    (total, item) =>
+                                        total +
+                                        Number(item.price) *
+                                        Number(item.quantity),
+                                    0
+                                )
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Bouton de confirmation -->
+                    <button
+                        type="button"
+                        class="confirm"
+                        onclick="confirmOrder()"
+                    >
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Confirmer la sélection
+
+                    </button>
+
+                </section>
+
+            `;
+        }
+
+
+        /* =====================================================
+           5. SAUVEGARDER LE PANIER
+
+           Chaque changement est sauvegardé dans localStorage.
+           Ainsi, si l'utilisateur revient sur la page,
+           les plats restent présents.
+           ===================================================== */
+
+        function persist() {
+
+            localStorage.setItem(
+                "darDouhabiCart",
+                JSON.stringify(cart)
+            );
+
+            /* Réafficher la page après modification */
+            render();
+
+        }
+
+
+        /* =====================================================
+           6. MODIFIER LA QUANTITÉ
+
+           i = position du plat dans le panier
+           d = +1 ou -1
+           ===================================================== */
+
+        function changeQty(i, d) {
+
+            /*
+             * On empêche la quantité de descendre sous 1.
+             */
+
+            cart[i].quantity = Math.max(
+                1,
+                Number(cart[i].quantity) + d
+            );
+
+
+            /* Sauvegarder puis actualiser */
+            persist();
+
+        }
+
+
+        /* =====================================================
+           7. SUPPRIMER UN PLAT
+           ===================================================== */
+
+        function removeItem(i) {
+
+            /*
+             * Supprime le plat correspondant à l'index.
+             */
+
+            cart.splice(i, 1);
+
+
+            /* Sauvegarde + réaffichage */
+            persist();
+
+        }
+
+
+        /* =====================================================
+           8. CONFIRMER LA SÉLECTION
+           ===================================================== */
+
+        function confirmOrder() {
+
+            /* Calcul du total */
+            const total = cart.reduce(
+                (sum, item) =>
+                    sum +
+                    Number(item.price) *
+                    Number(item.quantity),
+                0
+            );
+
+
+            /*
+             * Enregistrer la commande dans un autre emplacement.
+             *
+             * IMPORTANT :
+             * Cela ne supprime PAS le panier actuel.
+             */
+
+            localStorage.setItem(
+                "darDouhabiOrder",
+                JSON.stringify({
+                    items: cart,
+                    total: total
+                })
+            );
+
+
+            /*
+             * Message de confirmation.
+             */
+
+            alert(
+                "Votre sélection a été enregistrée.\n\n" +
+                "Total : " +
+                money(total)
+            );
+
+        }
+
+
+        /* =====================================================
+           9. PREMIER AFFICHAGE
+           ===================================================== */
+
+        render();
+
+    </script>
+
+</body>
+</html>
